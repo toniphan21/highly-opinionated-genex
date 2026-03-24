@@ -17,6 +17,7 @@ import (
 	composergen "nhatp.com/go/composer-gen"
 	genlib "nhatp.com/go/gen-lib"
 	"nhatp.com/go/gen-lib/cli"
+	"nhatp.com/go/gen-lib/cli/color"
 	stringergen "nhatp.com/go/stringer-gen"
 )
 
@@ -51,11 +52,11 @@ func main() {
 	workingDir := args.ResolveWorkingDir()
 
 	if args.DryRun {
-		slog.Info(cli.ColorBinary(BinaryName) + " " + cli.ColorVersion(BinaryVersion) + " in DRY mode")
+		slog.Info(color.Binary(BinaryName) + " " + color.Version(BinaryVersion) + " in DRY mode")
 	} else {
-		slog.Info(cli.ColorBinary(BinaryName) + " " + cli.ColorVersion(BinaryVersion))
+		slog.Info(color.Binary(BinaryName) + " " + color.Version(BinaryVersion))
 	}
-	slog.Info(cli.ColorBinary(BinaryName) + " is working on directory: " + cli.ColorInput(workingDir))
+	slog.Info(color.Binary(BinaryName) + " is working on directory: " + color.Input(workingDir))
 
 	fileManager := genlib.NewFileManager(workingDir)
 	var err error
@@ -91,14 +92,14 @@ func main() {
 	}
 
 	if args.DryRun {
-		slog.Info(cli.ColorBinary(BinaryName) + " is printing generated file content")
+		slog.Info(color.Binary(BinaryName) + " is printing generated file content")
 		for _, out := range fileManager.Files() {
 			cli.PrintFileWithFunction(out.RelPath, []byte(out.Content()), func(l string) {
 				slog.Info(l)
 			})
 		}
 	} else {
-		slog.Info(cli.ColorBinary(BinaryName) + " is saving generated file to disk")
+		slog.Info(color.Binary(BinaryName) + " is saving generated file to disk")
 		for _, out := range fileManager.Files() {
 			if err := os.WriteFile(out.FullPath, []byte(out.Content()), 0644); err != nil {
 				panic(err)

@@ -5,7 +5,7 @@ go 1.25.1
 require (
 	github.com/alexflint/go-arg v1.6.1
 	golang.org/x/tools v0.43.0
-	nhatp.com/go/chainer-gen v0.4.0
+	nhatp.com/go/chainer-gen v0.5.0
 	nhatp.com/go/composer-gen v0.3.0
 	nhatp.com/go/gen-lib v0.11.0
 	nhatp.com/go/stringer-gen v0.5.0

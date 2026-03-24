@@ -45,22 +45,22 @@ func (op *updateUserOp) execute(ctx context.Context, input UpdateUserInput) erro
 }
 
 type Service interface {
-	UpdateUser(ctx context.Context, input UpdateUserInput) error
-
 	CreateUser(ctx context.Context, input CreateUserInput) error
+
+	UpdateUser(ctx context.Context, input UpdateUserInput) error
 }
 
 type serviceImpl struct {
-	updateUserOp *updateUserOp
 	createUserOp *createUserOp
-}
-
-func (s *serviceImpl) UpdateUser(ctx context.Context, input UpdateUserInput) error {
-	return s.updateUserOp.execute(ctx, input)
+	updateUserOp *updateUserOp
 }
 
 func (s *serviceImpl) CreateUser(ctx context.Context, input CreateUserInput) error {
 	return s.createUserOp.execute(ctx, input)
+}
+
+func (s *serviceImpl) UpdateUser(ctx context.Context, input UpdateUserInput) error {
+	return s.updateUserOp.execute(ctx, input)
 }
 
 type serviceDeps struct {
